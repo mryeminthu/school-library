@@ -1,7 +1,6 @@
-require_relative 'nameable'
-
 class TrimmerDecorator < Nameable
   def initialize(nameable)
+    super()
     @nameable = nameable
   end
 
