@@ -14,22 +14,13 @@ class Person < Nameable
     @rentals = []
   end
 
-  def can_use_services?
-    of_age? || @parent_permission
-  end
-
-  def correct_name
-    @name
-  end
-
   def classroom=(classroom)
     @classroom = classroom
-    classroom.students << self
+    classroom.add_student(self) unless classroom.students.include?(self)
   end
 
-  def add_rental(rental)
-    rentals << rental
-    rental.person = self
+  def add_rental(book, date)
+    Rental.new(date, book, self)
   end
 
   private
