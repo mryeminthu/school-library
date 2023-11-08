@@ -1,3 +1,5 @@
+require 'date'
+
 class Rental
   attr_accessor :date, :book, :person
 
@@ -5,7 +7,7 @@ class Rental
     @date = date
     @person = person
     @book = book
-    person.add_rental(self)
-    book.add_rental(self)
+    person.rentals.push(self)
+    book.rentals.push(self)
   end
 end

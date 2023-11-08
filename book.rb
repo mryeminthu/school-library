@@ -1,13 +1,22 @@
-class Book
+require_relative 'nameable'
+require_relative 'rental'
+require 'date'
+
+class Book < Nameable
   attr_accessor :title, :author, :rentals
 
   def initialize(title, author)
+    super()
     @title = title
     @author = author
     @rentals = []
   end
 
-  def add_rental(person, date)
-    Rental.new(date, self, person)
+  def to_s
+    "Title: #{@title}, Author: #{@author}"
+  end
+
+  def add_rental(rental)
+    @rentals << rental
   end
 end
