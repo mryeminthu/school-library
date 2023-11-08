@@ -15,15 +15,6 @@ class SchoolLibraryApp
     @rental_list = []
   end
 
-  def main
-    puts 'Welcome to the School Library App!'
-    loop do
-      display_menu
-      choice = gets.chomp.to_i
-      process_choice(choice)
-    end
-  end
-
   def display_menu
     puts 'Please choose an option by entering a number:'
     puts '1 - List all books'
@@ -34,22 +25,6 @@ class SchoolLibraryApp
     puts '6 - List all rentals for a given person id'
     puts '7 - Exit'
   end
-
-  # rubocop:disable Metrics/CyclomaticComplexity
-  def process_choice(choice)
-    case choice
-    when 1 then list_books
-    when 2 then list_people
-    when 3 then create_person
-    when 4 then create_book
-    when 5 then create_rental
-    when 6 then list_rentals_for_person
-    when 7 then exit_app
-    else
-      puts 'Invalid choice. Please choose a valid option.'
-    end
-  end
-  # rubocop:enable Metrics/CyclomaticComplexity
 
   def list_books
     puts 'List of books:'
@@ -154,12 +129,4 @@ class SchoolLibraryApp
       puts "Person with ID #{person_id} not found."
     end
   end
-
-  def exit_app
-    puts 'Thank you for using this app!'
-    exit
-  end
 end
-
-app = SchoolLibraryApp.new
-app.main
