@@ -1,3 +1,5 @@
+require_relative 'rental'
+
 class Person < Nameable
   attr_accessor :name, :age, :rentals
   attr_reader :id
@@ -12,8 +14,9 @@ class Person < Nameable
     @rentals = []
   end
 
-  def add_rental(book, date)
-    Rental.new(date, book, self)
+  def add_rental(date, book)
+    rental = Rental.new(date, self, book)
+    @rentals << rental
   end
 
   private
