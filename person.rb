@@ -1,13 +1,10 @@
-require_relative 'nameable'
-require_relative 'rental'
-
 class Person < Nameable
   attr_accessor :name, :age, :rentals
   attr_reader :id
 
-  def initialize(age:, name: 'Unknown', parent_permission: true)
+  def initialize(age:, name: 'Unknown', parent_permission: true, id: nil)
     super()
-    @id = generate_id
+    @id = id || generate_id
     @name = name
     @age = age
     @parent_permission = parent_permission
@@ -20,11 +17,17 @@ class Person < Nameable
     @rentals << rental
   end
 
-  private
-
-  def of_age?
-    @age >= 18
+  def to_h
+    {
+      'id' => @id,
+      'name' => @name,
+      'age' => @age,
+      'parent_permission' => @parent_permission,
+      'rentals' => @rentals.map(&:date)
+    }
   end
+
+  private
 
   def generate_id
     rand(1000..9999)

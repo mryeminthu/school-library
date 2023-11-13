@@ -6,8 +6,12 @@ def main
   loop do
     display_menu
     choice = gets.chomp.to_i
+    break if choice == 7
+
     process_choice(choice, app)
   end
+
+  exit_app(app)
 end
 
 def display_menu
@@ -21,7 +25,6 @@ def display_menu
   puts '7 - Exit'
 end
 
-# rubocop:disable Metrics/CyclomaticComplexity
 def process_choice(choice, app)
   case choice
   when 1
@@ -36,13 +39,10 @@ def process_choice(choice, app)
     create_rental(app)
   when 6
     list_rentals_for_person(app)
-  when 7
-    exit_app
   else
     invalid_choice
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity
 
 def list_books(app)
   app.list_books
@@ -68,9 +68,9 @@ def list_rentals_for_person(app)
   app.list_rentals_for_person
 end
 
-def exit_app
+def exit_app(app)
   puts 'Thank you for using the School Library App!'
-  exit
+  app.save_data
 end
 
 def invalid_choice
