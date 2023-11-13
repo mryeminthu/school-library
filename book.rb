@@ -1,7 +1,3 @@
-require_relative 'nameable'
-require_relative 'rental'
-require 'date'
-
 class Book < Nameable
   attr_accessor :title, :author, :rentals
 
@@ -18,5 +14,13 @@ class Book < Nameable
 
   def add_rental(rental)
     @rentals << rental
+  end
+
+  def to_h
+    {
+      'title' => @title,
+      'author' => @author,
+      'rentals' => @rentals.map(&:date)
+    }
   end
 end
